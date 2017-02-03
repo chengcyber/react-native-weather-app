@@ -4,7 +4,13 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React from 'react';
+import { AppRegistry } from 'react-native';
+import Root from './src';
+
+AppRegistry.registerComponent('RNweather', () =>　Root);
+
+/*import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -50,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('RNweather', () => RNweather);
+AppRegistry.registerComponent('RNweather', () => RNweather);*/

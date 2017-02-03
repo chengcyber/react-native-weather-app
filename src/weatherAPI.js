@@ -76,3 +76,13 @@ export const phrase = {
   },
   
 }
+
+
+export const getCurrentPosition = () => 
+    navigator.geolocation.getCurrentPosition(
+      (posData) => 
+        fetchWeather(posData.coords.latitude, posData.coords.longitude),
+      (error) => console.log(error),
+      {enableHighAccuracy: true, timeout: 10000}
+    )
+
