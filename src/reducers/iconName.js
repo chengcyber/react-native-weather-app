@@ -1,11 +1,11 @@
-import * as CONST from '../constants';
+import { TYPE } from '../constants';
 
 const iconName = (state = 'md-ionitron', action) => {
 
   /**
    * Request fetch weather from api
    */
-  if (action.type === CONST.FETCH_WEATHER_REQUEST) {
+  if (action.type === TYPE.FETCH_WEATHER_REQUEST) {
     return 'md-time';
   }
 
@@ -13,7 +13,7 @@ const iconName = (state = 'md-ionitron', action) => {
   /**
    * Response weather infos from api
    */
-  if (action.type === CONST.FETCH_WEATHER_SUCCESS) {
+  if (action.type === TYPE.FETCH_WEATHER_SUCCESS) {
     const weather = action.response.weather;
     switch(weather) {
       case 'Clear': return 'md-sunnj'
@@ -31,7 +31,7 @@ const iconName = (state = 'md-ionitron', action) => {
   /**
    * Error occurred when fetching weather from api
    */
-  if (action.type === CONST.FETCH_WEATHER_FAILURE) {
+  if (action.type === TYPE.FETCH_WEATHER_FAILURE) {
     return 'md-ionitron'
   } 
   

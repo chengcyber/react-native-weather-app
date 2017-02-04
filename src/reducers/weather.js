@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import * as CONST from '../constants';
+import { TYPE } from '../constants';
 
 const main = (state = {}, action) => {
   switch(action.type) {
-    case CONST.FETCH_WEATHER_SUCCESS:
+    case TYPE.FETCH_WEATHER_SUCCESS:
       return action.response
-    case CONST.FETCH_WEATHER_REQUEST:
+    case TYPE.FETCH_WEATHER_REQUEST:
       return {}
     default: return state;
   }
@@ -13,10 +13,10 @@ const main = (state = {}, action) => {
 
 const isFetching = (state = false, action) => {
   switch(action.type) {
-    case CONST.FETCH_WEATHER_REQUEST:
+    case TYPE.FETCH_WEATHER_REQUEST:
       return true;
-    case CONST.FETCH_WEATHER_SUCCESS:
-    case CONST.FETCH_WEATHER_FAILURE:
+    case TYPE.FETCH_WEATHER_SUCCESS:
+    case TYPE.FETCH_WEATHER_FAILURE:
       return false;
     default:
       return state;
@@ -25,9 +25,9 @@ const isFetching = (state = false, action) => {
 
 const errMsg = (state = '', action) => {
   switch (action.type) {
-    case CONST.FETCH_WEATHER_FAILURE:
+    case TYPE.FETCH_WEATHER_FAILURE:
       return action.error
-    case CONST.FETCH_WEATHER_REQUEST:
+    case TYPE.FETCH_WEATHER_REQUEST:
       return ''
     default: 
       return state;

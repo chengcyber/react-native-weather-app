@@ -1,4 +1,4 @@
-import * as CONST from '../constants';
+import { TYPE } from '../constants';
 
 const initialState = {
     title: 'Hello RNweather',
@@ -12,7 +12,7 @@ const phrase = (state = initialState, action) => {
   /**
    * Response weather infos from api
    */
-  if (action.type === CONST.FETCH_WEATHER_REQUEST) {
+  if (action.type === TYPE.FETCH_WEATHER_REQUEST) {
     return {
       title: 'Fetching current weather',
       subtitle: 'Be patient, you are witnessing a miracle',
@@ -25,7 +25,7 @@ const phrase = (state = initialState, action) => {
   /**
    * Response weather infos from api
    */
-  if (action.type === CONST.FETCH_WEATHER_SUCCESS) {
+  if (action.type === TYPE.FETCH_WEATHER_SUCCESS) {
     const weather = action.response.weather;
     switch(weather) {
       case 'Clear': return {
@@ -97,7 +97,7 @@ const phrase = (state = initialState, action) => {
   /**
    * Error occurred when fetching weather from api
    */
-  if (action.type === CONST.FETCH_WEATHER_FAILURE) {
+  if (action.type === TYPE.FETCH_WEATHER_FAILURE) {
     return {
       title: 'fetch weather failed!',
       subtitle: 'check your LOCATION settings',

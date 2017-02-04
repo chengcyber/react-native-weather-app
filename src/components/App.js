@@ -19,24 +19,22 @@ class App extends Component {
     this.fetchData();
   }
   
+  componentDidUpdate() {
+  }
+  
   fetchData () {
-    const { fetchWeather } = this.props;
-    console.log('fetch data called')
-    navigator.geolocation.getCurrentPosition(
-      (posData) => {
-        console.log(posData);
+    const { fetchWeather, getCoordsCurrent } = this.props;
+
+    getCoordsCurrent()
+      .then((posData) => {
+        console.log(posData)
         fetchWeather(posData.coords.latitude, posData.coords.longitude)
-          .then(()=> console.log('fetch weather done'))
-          .catch(()=> console.log('fetch weather error'))
-      },
-      (error) => console.log(error),
-      {timeout: 10000}
-    )
+      });
   }
 
   render() {
+    console.log('render here');
     const { weather, temperature, phrase, iconName } = this.props;
-    console.log(this.props);
     return (
       <View style={[styles.container, {backgroundColor: phrase.background}]}>
         <StatusBar hidden={true} />
@@ -65,7 +63,8 @@ App = connect(
     weather: state.weather.main.weather,
     temperature: state.weather.main.temperature,
     phrase: state.phrase,
-    iconName: state.iconName
+    iconName: state.iconName,
+    coords: state.coords
   }),
   actions
 )(App)
