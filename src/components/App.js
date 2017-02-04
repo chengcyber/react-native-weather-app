@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   StyleSheet,
   Text,
@@ -8,41 +9,49 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import Highlighter from 'react-native-highlight-words';
-import { fetchWeather, iconName, phrase, fetchWeatherAtCurrentPosition } from '../weatherAPI';
+import { iconName, phrase } from '../weatherAPI';
+import * as actions from '../actions';
+// import { fetchWeather } from '../actions';
 
-
-export default class App extends Component {
-
-  componentWillMount() {
-    this.state = {
-      temperature: '-',
-      weather: 'Default'
-    }
-  }
-
+class App extends Component {
 
   componentDidMount() {
-    this.getLocation();
+    this.fetchData();
+  }
+  
+  fetchData () {
+    const { fetchWeather } = this.props;
+    console.log('fetch data called')
+    navigator.geolocation.getCurrentPosition(
+      (posData) => {
+        console.log(posData);
+        fetchWeather(posData.coords.latitude, posData.coords.longitude)
+          .then(()=> console.log('fetch weather done'))
+          .catch(()=> console.log('fetch weather error'))
+      },
+      (error) => console.log(error),
+      {timeout: 10000}
+    )
   }
 
-
   render() {
-    const { weather, temperature } = this.state;
+    const { weather, temperature, phrase, iconName } = this.props;
+    console.log(this.props);
     return (
-      <View style={[styles.container, {backgroundColor: phrase[weather].background}]}>
+      <View style={[styles.container, {backgroundColor: phrase.background}]}>
         <StatusBar hidden={true} />
 
         <View style={styles.header}>
-          <Icon name={iconName[weather]} size={80} color={'white'}/>
+          <Icon name={iconName} size={80} color={'white'}/>
           <Text style={styles.temperature}>{temperature}°</Text>
         </View>
         <View style={styles.body}>
           <Highlighter style={styles.h1}
-            highlightStyle={{color: phrase[weather].color}}
-            searchWords={[phrase[weather].highlight]}
-            textToHighlight={phrase[weather].title}
+            highlightStyle={{color: phrase.color}}
+            searchWords={[phrase.highlight]}
+            textToHighlight={phrase.title}
           />
-          <Text style={styles.h2}>{phrase[weather].subtitle}</Text>
+          <Text style={styles.h2}>{phrase.subtitle}</Text>
         </View>
 
       </View>
@@ -50,6 +59,18 @@ export default class App extends Component {
   }
 
 }
+
+App = connect(
+  (state) => ({
+    weather: state.weather.main.weather,
+    temperature: state.weather.main.temperature,
+    phrase: state.phrase,
+    iconName: state.iconName
+  }),
+  actions
+)(App)
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {

@@ -6,9 +6,9 @@
 
 import React from 'react';
 import { AppRegistry } from 'react-native';
-import Root from './src';
+import RNweather from './src';
 
-AppRegistry.registerComponent('RNweather', () =>　Root);
+AppRegistry.registerComponent('RNweather', () => RNweather);
 
 /*import React, { Component } from 'react';
 import {
