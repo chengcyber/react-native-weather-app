@@ -21,13 +21,19 @@ class App extends Component {
   componentDidUpdate() {
   }
   
+  fetchCurrent () {
+    const { coords } = this.props;
+    return coords.current; 
+  }
+  
   fetchData () {
     const { fetchWeather, getCoordsCurrent } = this.props;
 
     getCoordsCurrent()
       .then((posData) => {
-        console.log(posData)
-        fetchWeather(posData.coords.latitude, posData.coords.longitude)
+        // fetchWeather(posData.coords.latitude, posData.coords.longitude)
+        const { latitude, longitude } = this.fetchCurrent();
+        fetchWeather(latitude, longitude);
       });
   }
 
