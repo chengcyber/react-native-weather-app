@@ -14,3 +14,7 @@ Loading Screen
 IOS Screen  
 
 ![IOS screen](images/ios.png)
+
+Android Screen
+  
+![Android screen](images/android.gif)
