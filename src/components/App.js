@@ -11,7 +11,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Highlighter from 'react-native-highlight-words';
 import { iconName, phrase } from '../weatherAPI';
 import * as actions from '../actions';
-// import { fetchWeather } from '../actions';
 
 class App extends Component {
 
@@ -33,7 +32,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('render here');
     const { weather, temperature, phrase, iconName } = this.props;
     return (
       <View style={[styles.container, {backgroundColor: phrase.background}]}>

@@ -4,7 +4,7 @@ import { getWeatherIsFetching, getCoordsIsFetching } from '../reducers';
 
 export const fetchWeather = (lat, lon) => (dispatch, getState) => {
 
-  console.log('getWeatherIsFetching', getWeatherIsFetching(getState()))
+  // console.log('getWeatherIsFetching', getWeatherIsFetching(getState()))
   if (getWeatherIsFetching(getState())) return Promise.resolve();
   dispatch({
     type: TYPE.FETCH_WEATHER_REQUEST,
